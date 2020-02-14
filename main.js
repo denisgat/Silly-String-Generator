@@ -7,26 +7,43 @@ function randomValueFromArray(array){
   return array[random];
 }
 
-var storyText = "It was 94 fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — :insertx: weighs 300 pounds, and it was a hot day.";
-var insertX = ["Willy the Goblin", "Big Daddy", "Father Christmas"];
-var insertY = ["the soup kitchen", "Disneyland", "the White House"];
-var insertZ = ["spontaneously combusted", "melted into a puddle on the sidewalk", "turned into a slug and crawled away"];
+let storyText = "It was 94 fahrenheit outside, so :xinsert: went for a walk. When they got to :yinsert:, they stared in horror for a few moments, then :zinsert: Bob saw the whole thing, but was not surprised —:xinsert: weighs 300 pounds, and it was a hot day.";
+let insertX = ["Willy the Goblin", "Big Daddy", "Father Christmas"];
+let insertY = ["the soup kitchen", "Disneyland", "the White House"];
+let insertZ = ["spontaneously combusted", "melted into a puddle on the sidewalk", "turned into a slug and crawled away"];
 
 randomize.addEventListener('click', result);
 
+console.log(storyText)
+
 function result() {
 
-  if(customName.value !== '') {
-    let name = customName.value;
+let newStory = storyText;
 
+
+var xItem = randomValuefromArray(insertX);
+var yItem = randomValuefromArray(insertY);
+var zItem = randomValuefromArray(insertZ);
+
+let newStory = newStory.replace(":xinsert:",xItem);
+let newStory = newStory.replace(":yinsert:",yItem);
+let newStory = newStory.replace(":zinsert:",zItem);
+let newStory = newStory.replace(":xinsert:",xItem);
+
+
+
+  if(customName.value !== '') {
+    const name = customName.value;
+    let newStory = newStory.replace("Bob",name);
   }
 
   if(document.getElementById("uk").checked) {
-    let weight = Math.round(300);
-    let temperature =  Math.round(94);
-
+    const weight = Math.round(300/14) + " stone";
+    const temperature =  Math.round((94-32)*(5/9)) + "centigrade";
+    let newStory = newStory.replace("94 fahrenheit",temperature);
+    let newStory = newStory.replace("300 lbs", weight);
   }
 
-  story.textContent = ;
+  story.textContent = newStory;
   story.style.visibility = 'visible';
 }
